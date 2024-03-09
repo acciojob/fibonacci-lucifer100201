@@ -1,4 +1,4 @@
-function fibonacci(num) {
+function fibonacci(num, memo = {}) {
   if(num==1){
 	  return 0;
   }
@@ -6,7 +6,10 @@ function fibonacci(num) {
 		return 1;
 	}
   
-  return fibonacci(num-1)+fibonacci(num-2);
+  if (!memo[num]) {
+    memo[num] = fibonacci(num - 1, memo) + fibonacci(num - 2, memo);
+  }
+  
+  return memo[num];
 }
-
 module.exports = fibonacci;
